@@ -1,0 +1,12 @@
+No Partners.
+
+The service is registered using kDNSServiceInterfaceIndexLocalOnly,
+so that it is only seen locally, as per the specs
+
+The game works as specified.
+User input is not accepted if it is just whitespace, and the user is sent the promt again.
+All user input is trimmed of its leading and trailing whitespace.
+
+If a user quits before entering in their name and move, the server and the other player will wait for
+another user to join.
+

@@ -1,0 +1,35 @@
+Ryan Berlin, no partners
+
+***SUPPORTS IPv6***
+
+Some specific server behavior:
+
+- if a new user enters a nickname already in use, it is sent the error message 
+  "Invalid command, please identify yourself with USER.", and is disconnected
+
+- if a client disconnects abnormally (without using QUIT), all other users are notified
+  as if the client did normally use QUIT
+
+- Commands must have the exact amount of arguments.  If a command is given with extra
+  arguments it is treated as an invalid command.  (ex. LIST #netprog foo)
+
+- If a user tries to join a channel that they are already in, it is ignored
+- If a user tries to part a channel that they are not in (or that doesn't exist),
+  an error message is sent
+- If a user calls PART with no arguments, and is not currently in any channels,
+  it is ignored
+
+- If there is no password set and operator is called, the following error message is returned:
+  "Operator status not available."
+
+- If a user tries to send a message to a nonexistant user, the following error is returned:
+  "<user> is not on the server."  
+
+- If a user tries to use KICK without being an operator, the following error is returned:
+  "You must have OPERATOR status."
+- If a user tries to KICK a nonexistant user, the following error is returned:
+  "<user> is not on the server."  
+- If a user is kicked from a channel they are not in (or doesn't exist), an error messege is sent
+
+
+

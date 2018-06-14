@@ -1,0 +1,78 @@
+Status of this Memo
+
+   This RFC specifies an IAB standards track protocol for the Internet
+   community, and requests discussion and suggestions for improvements.
+   Please refer to the current edition of the "IAB Official Protocol
+   Standards" for the standardization state and status of this protocol.
+   Distribution of this memo is unlimited.
+
+Summary
+
+   TFTP is a very simple protocol used to transfer files.  It is from
+   this that its name comes, Trivial File Transfer Protocol or TFTP.
+  
+ Each nonterminal packet is acknowledged separately.  This document
+   describes the protocol and its types of packets.  The document also
+   explains the reasons behind some of the design decisions.
+
+Acknowlegements
+
+   The protocol was originally designed by Noel Chiappa, and was
+   redesigned by him, Bob Baldwin and Dave Clark, with comments from
+   Steve Szymanski.  The current revision of the document includes
+   modifications stemming from discussions with and suggestions from
+   Larry Allen
+, Noel Chiappa, Dave Clark, Geoff Cooper, Mike Greenwald,
+   Liza Martin, David Reed, Craig Milo Rogers (of USC-ISI), Kathy
+   Yellick, and the author.  The acknowledgement and retransmission
+   scheme was inspired by TCP, and the error mechanism was suggested by
+   PARC's EFTP abort message.
+
+   The May, 1992 revision to fix the "Sorcerer's Apprentice" protocol
+   bug [4] and other minor document problems was done by Noel Chiappa.
+
+   This research was supported by the Advanced Research Projects A
+gency
+   of the Department of Defense and was monitored by the Office of Naval
+   Research under contract number N00014-75-C-0661.
+
+1. Purpose
+
+   TFTP is a simple protocol to transfer files, and therefore was named
+   the Trivial File Transfer Protocol or TFTP.  It has been implemented
+   on top of the Internet User Datagram protocol (UDP or Datagram) [2]
+
+
+
+Sollins                                                         [Page 1]
+ 
+RFC 1350                    TFTP Revision 2                  
+  July 1992
+
+
+   so it may be used to move files between machines on different
+   networks implementing UDP.  (This should not exclude the possibility
+   of implementing TFTP on top of other datagram protocols.)  It is
+   designed to be small and easy to implement.  Therefore, it lacks most
+   of the features of a regular FTP.  The only thing it can do is read
+   and write files (or mail) from/to a remote server.  It cannot list
+   directories, and currently has no provisions for user authenticatio
+n.
+   In common with other Internet protocols, it passes 8 bit bytes of
+   data.
+
+   Three modes of transfer are currently supported: netascii (This is
+   ascii as defined in "USA Standard Code for Information Interchange"
+   [1] with the modifications specified in "Telnet Protocol
+   Specification" [3].)  Note that it is 8 bit ascii.  The term
+   "netascii" will be used throughout this document to mean this
+   particular version of ascii.); octet (This replaces the "binary" mode
+   of previous ve
+rsions of this document.) raw 8 bit bytes; mail,
+   netascii characters sent to a user rather than a file.  (The mail
+   mode is obsolete and should not be implemented or used.)  Additional
+   modes can be defined by pairs of cooperating hosts.
+
+   Reference [4] (section 4.2) should be consulted for further valuable
+   directives and suggestions on TFTP.
+
